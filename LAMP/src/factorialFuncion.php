@@ -35,6 +35,7 @@ function potencia(int $base, int $exp = 2): int
             echo "<p>Type error: " . $erro->getMessage() . "</p>";}
         catch (Exception $e) {
             echo "<p>Exception: " . $e->getMessage() . "</p>";}
+    
     ?>
 
 </body>
