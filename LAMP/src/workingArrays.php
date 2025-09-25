@@ -11,6 +11,11 @@ function tripleCheck(array $lista) : bool {
             $copia_valor == $valor;
             $contador += 1;
         }
+
+        elseif ($copia_valor == $valor) {
+            $contador += 1;
+        }
+
     };
 };
 ?>
