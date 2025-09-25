@@ -5,12 +5,9 @@ declare(strict_types=1);
 function tripleCheck(array $lista) : bool {
     
     $contador = 0;
-    $copia_valor = NULL;    
+    $copia_valor = null;    
     foreach ($lista as $valor){
-        if (copia_valor == NULL){
-            $copia_valor == $valor;
-            $contador += 1;
-        }
+        if ($valor === )
 
         elseif ($copia_valor == $valor) {
             $contador += 1;
