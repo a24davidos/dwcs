@@ -47,7 +47,6 @@ function tripleCheck(array $lista) : bool {
 
         paisCapital($ceu)
 
-
     ?>
 </body>
 </html>
