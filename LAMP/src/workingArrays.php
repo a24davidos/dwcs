@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-// Creo la función 
+//Función triple check
 function tripleCheck(array $lista) : bool {
     // Comprobo que teñamos suficientes elementos 
     if (count($lista) < 3){
@@ -17,11 +17,12 @@ function tripleCheck(array $lista) : bool {
     return false;   
     };
 
-    function paisCapital($array){
-        foreach($array as $pais => $capital){
-            echo "The capital of " .$pais. " is " . $capital . "<br>";
-        }
+// Funcion pais capital
+function paisCapital($array){
+    foreach($array as $pais => $capital){
+        echo "The capital of " .$pais. " is " . $capital . "<br>";
     }
+}
 ?>
 
 <!DOCTYPE html>
