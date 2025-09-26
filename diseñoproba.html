@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MM Radio</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #fff;
+        color: #000;
+      }
+
+      /* Header */
+      header {
+        display: flex;
+        border-bottom: 1px solid #000;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 10px;
+        border-right: 1px solid #000;
+      }
+
+      nav {
+        display: flex;
+        flex-grow: 1;
+      }
+
+      nav a {
+        flex: 1;
+        text-align: center;
+        text-decoration: none;
+        color: #000;
+        padding: 15px;
+        border-right: 1px solid #000;
+        transition: background 0.2s;
+      }
+
+      nav a:hover {
+        background: #000;
+        color: #fff;
+      }
+
+      .search-bar {
+        padding: 10px;
+        border-left: 1px solid #000;
+      }
+
+      .search-bar input {
+        padding: 5px;
+        border: 1px solid #000;
+        background: #fff;
+        color: #000;
+      }
+
+      .player-bar {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #000;
+      }
+
+      /* Layout */
+      .container {
+        display: grid;
+        grid-template-columns: 200px 1fr 200px;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      /* Sidebar izquierda */
+      .sidebar-left {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .sidebar-left h3 {
+        margin: 0;
+        padding: 10px;
+        border-bottom: 1px solid #000;
+        font-size: 1.1rem;
+        background: #000;
+        color: #fff;
+      }
+
+      .sidebar-left p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      /* Contenido principal */
+      .main-content {
+        text-align: center;
+      }
+
+      .main-content img {
+        max-width: 100%;
+        border: 1px solid #000;
+      }
+
+      .caption {
+        background: #000;
+        color: #fff;
+        padding: 5px;
+        font-size: 0.9rem;
+      }
+
+      /* Sidebar derecha */
+      .sidebar-right {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .box {
+        background: #e0e0e0;
+        height: 60px;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo">MM</div>
+      <nav>
+        <a href="#">RADIO</a>
+        <a href="#">ARCHIVO</a>
+        <a href="#">SHOP</a>
+        <a href="#">ABOUT</a>
+      </nav>
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar..." />
+      </div>
+    </header>
+
+    <!-- Player bar -->
+    <div class="player-bar">▶ Live playing: DMX KREW...</div>
+
+    <!-- Layout -->
+    <div class="container">
+      <!-- Sidebar izquierda -->
+      <aside class="sidebar-left">
+        <div>
+          <h3>NEWS & EVENTS</h3>
+          <p>Últimas novedades y próximos eventos destacados.</p>
+        </div>
+        <div>
+          <h3>SESIONES</h3>
+          <p>Escucha sets en vivo y sesiones grabadas.</p>
+        </div>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="main-content">
+        <img src="https://via.placeholder.com/600x400" alt="Artista" />
+        <div class="caption">THE HACKER & MISS KITTIN</div>
+      </main>
+
+      <!-- Sidebar derecha -->
+      <aside class="sidebar-right">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </aside>
+    </div>
+  </body>
+</html>

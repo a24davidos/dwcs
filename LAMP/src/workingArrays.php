@@ -3,18 +3,25 @@ declare(strict_types=1);
 
 // Creo la función 
 function tripleCheck(array $lista) : bool {
-    
-    $contador = 0;
-    $copia_valor = null;    
-    foreach ($lista as $valor){
-        if ($valor === )
+    // Comprobo que teñamos suficientes elementos 
+    if (count($lista) < 3){
+        return false; 
+    } 
 
-        elseif ($copia_valor == $valor) {
-            $contador += 1;
-        }
+    // Comprobo que sexan consecutivos
+    for ($i=0; $i < count($lista) - 2 ; $i++) { 
+        if ($lista[$i] === $lista[$i + 1] && $lista[$i] === $lista[$i + 2])
+            return TRUE;
+        };
 
+    return false;   
     };
-};
+
+    function paisCapital($array){
+        foreach($array as $pais => $capital){
+            echo "The capital of " .$pais. " is " . $capital . "<br>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -26,13 +33,19 @@ function tripleCheck(array $lista) : bool {
 </head>
 <body>
 
-
     <?php 
 
-        $arrayValor = [1,2,3,4,5];
+        echo "<h4> Exercicio Triple Check</h4>";
 
+        $arrayValor = [1,2,2,2,5];
         $resultado = tripleCheck($arrayValor);
+        echo var_dump($resultado);
 
+        echo "<h4> Exercicios Países  </h4>";
+
+        $ceu = array( "Italy"=>"Rome", "Luxembourg"=>"Luxembourg", "Belgium"=> "Brussels", "Denmark"=>"Copenhagen", "Finland"=>"Helsinki", "France" => "Paris", "Slovakia"=>"Bratislava", "Slovenia"=>"Ljubljana", "Germany" => "Berlin", "Greece" => "Athens", "Ireland"=>"Dublin", "Netherlands"=>"Amsterdam", "Portugal"=>"Lisbon", "Spain"=>"Madrid", "Sweden"=>"Stockholm", "United Kingdom"=>"London", "Cyprus"=>"Nicosia", "Lithuania"=>"Vilnius", "Czech Republic"=>"Prague", "Estonia"=>"Tallin", "Hungary"=>"Budapest", "Latvia"=>"Riga", "Malta"=>"Valetta", "Austria" => "Vienna", "Poland"=>"Warsaw") ;
+
+        paisCapital($ceu)
 
     ?>
 </body>
