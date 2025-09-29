@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php
+    <?php
 
     $datos = [
         "cocacola" => ["text" => "Coca Cola", "precio" => 2.1],
@@ -20,7 +20,24 @@
     ]
     ];
 
-?>
+    ?>
+
+
+    <h1>Task 3.6 Generate a Select Dynamically </h1>
+
+    <select name="opcion">
+
+    <?php
+    foreach($datos as $claveValor => $valor){
+        echo ("<option value='".$claveValor."'>".$valor["text"]." (".$valor["precio"].")</option>");    
+    }
+
+    ?>
+    </select> 
+
+    
+
+
 
 </body>
 </html>
