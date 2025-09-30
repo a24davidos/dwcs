@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+$datos = [
+    "cocacola" => ["text" => "Coca Cola", "precio" => 2.1],
+    "pepsicola" => ["text"=> "Pepsi Cola", "precio"=>2], 
+    "fantanaranja" => ["text" => "Fanta Naranja", "precio" => 2.5],
+    "trinamanzana" => ["text" => "Trina Manzana", "precio" => 2.3]
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,18 +21,11 @@
 
     <?php
 
-    $datos = [
-        "cocacola" => ["text" => "Coca Cola", "precio" => 2.1],
-        "pepsicola" => ["text"=> "Pepsi Cola", "precio"=>2], 
-        "fantanaranja" => ["text" => "Fanta Naranja", "precio" => 2.5],
-        "trinamanzana" => ["text" => "Trina Manzana", "precio" => 2.3
-    ]
-    ];
 
     ?>
 
 
-    <h1>Task 3.6 Generate a Select Dynamically </h1>
+    <h1>Task 2.6 Generate a Select Dynamically </h1>
 
     <select name="opcion">
 
