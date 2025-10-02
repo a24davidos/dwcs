@@ -1,0 +1,1 @@
+Intentar hacerlo con cookies y otro con session
