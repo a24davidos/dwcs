@@ -145,6 +145,9 @@ echo "<h3>Os teus datos:</h3>";
     if ($singon3 != "") {
         echo $singon3."<br>";
     }
+
+     
+
 ?>
 
 
