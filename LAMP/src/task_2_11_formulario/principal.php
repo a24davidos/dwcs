@@ -19,7 +19,24 @@ $subjects = [
 ];
 
 $subject = $name = "";
-$subjectErr = $nameErr = "";
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Guardamos las variables limpias
+    $name = test_input($_POST['name']);
+    $subject = test_input($_POST['subject']);
+
+    // Guardamos las cookies
+    setcookie("name", $name, time() + (7 * 24 * 60 * 60), "/");
+    setcookie("subject", $subject, time() + (7 * 24 * 60 * 60), "/");
+
+    header("Location: manage.php");
+    exit;
+
+}
+
+
 
 ?>
 
@@ -41,7 +58,6 @@ $subjectErr = $nameErr = "";
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" >
     Name and surnames: 
     <input type="text" name="name" required value="<?= $name ?>"> 
-    <span class="error"><?= $nameErr ? "* ".$nameErr : "" ?></span>
     <br><br>
 
     <label for="subject">Subject to enroll: </label>
