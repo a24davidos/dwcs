@@ -3,9 +3,12 @@ require_once("MyGuests.php");
 class Operations
 {
     private $conn;
+    //Y este es la función que llama a openConnection 
     public function __construct(){
         $this->openConnection();
     }
+
+    //Esta función es la encargada de abrir la conexión 
     public function openConnection()
     {
         // Database configuration (match your docker-compose.yml)
