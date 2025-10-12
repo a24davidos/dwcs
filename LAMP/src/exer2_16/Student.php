@@ -7,7 +7,7 @@ class Student
     private $surname;
     private $age;
 
-
+ 
     public function getId()
     {
         return $this->id;
@@ -75,4 +75,3 @@ class Student
         return $this;
     }
 }
-?>

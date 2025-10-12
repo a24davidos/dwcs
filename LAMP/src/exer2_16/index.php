@@ -16,6 +16,7 @@ function printRow($student)
 {
     //Aqui hacer una función que me imprima cada row 
     echo "<tr>";
+    echo "<td>" . $student->getId() . "</td>";
     echo "<td>" . $student->getDni() . "</td>";
     echo "<td>" . $student->getName() . "</td>";
     echo "<td>" . $student->getSurname() . "</td>";
@@ -24,7 +25,7 @@ function printRow($student)
     //Formulario update 
     echo "<td>
         <form action='update_student.php' method='POST'>
-            <input type='hidden' name='dni' value=".$student->getDni().">
+            <input type='hidden' name='id' value=".$student->getId().">
             <input type='submit' value='Update' name='vUpdate'>
         </form>
     </td>";
@@ -75,6 +76,7 @@ try {
     <br>
     <table border="1px">
         <tr>
+            <th>ID</th>
             <th>DNI</th>
             <th>Name</th>
             <th>Surname</th>
@@ -83,6 +85,7 @@ try {
             <th>Delete</th>
         </tr>
         <tr>
+            <td>0</td>
             <td>48110559X</td>
             <td>David</td>
             <td>Otero</td>

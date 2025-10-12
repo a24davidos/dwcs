@@ -44,7 +44,7 @@ class OperationsDB
     //Función que me devuelve una lista con todos los estudiantes
     function studentsList()
     {
-        $sqlString = "select dni, name, surname, age from Students";
+        $sqlString = "select id, dni, name, surname, age from Students";
         $query = $this->conn->prepare($sqlString);
         $query->execute();
         // Creo un nuevo array
@@ -76,14 +76,15 @@ class OperationsDB
         }
     }
 
-    //Función que me permite conseguir un estudiante por su DNI
-    function getStudent($dni){
-        $sqlString = "select dni, name, surname, age from Students where dni=?";
+    //Función que me permite conseguir un estudiante por su ID
+    function getStudent($id){
+        $sqlString = "select id, dni, name, surname, age from Students where id = ?";
         $query = $this->conn->prepare($sqlString);
-        $query->execute([$dni]);
+        $query->execute([$id]);
         $estudiante = $query->fetchObject("Student");
-        return $estudiante;
+        return $estudiante; // Devuelve null si no existe
     }
+
 
     //Función para modificar un estudiante
     function modifyStudent($student){
