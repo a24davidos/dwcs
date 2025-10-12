@@ -34,4 +34,75 @@ class OperationsDB
         //Creamos una instancia PDO para conectarlos con la base de datos 
         $this->conn = new PDO($dsn, $user, $pass, $options);
     }
+
+    //Función encargada de cerrar la conexión
+    public function closeConnection()
+    {
+        $this->conn = null;
+    }
+
+    //Función que me devuelve una lista con todos los estudiantes
+    function studentsList()
+    {
+        $sqlString = "select dni, name, surname, age from Students";
+        $query = $this->conn->prepare($sqlString);
+        $query->execute();
+        // Creo un nuevo array
+        $students = array();
+        //Recorro cada fila de la respuesta, y devuelvo un objeto y lo meto dentro de array.
+        while ($row = $query->fetchObject("Student")) {
+            $students[] = $row;
+        }
+        return $students;
+    }
+
+    //Función que me permite añadir un estudiante
+    function addStudent($student)
+    {
+        try {
+            $this->conn->beginTransaction();
+            $newStudent = $this->conn->prepare("insert into Students (dni, name, surname, age) VALUES (?, ?, ?, ?)");
+            $dni = $student->getDni();
+            $name = $student->getName();
+            $surname = $student->getSurname();
+            $age = $student->getAge();
+            $newStudent->execute([$dni, $name, $surname, $age]);
+            $numberOfRows = $newStudent->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
+
+    //Función que me permite conseguir un estudiante por su DNI
+    function getStudent($dni){
+        $sqlString = "select dni, name, surname, age from Students where dni=?";
+        $query = $this->conn->prepare($sqlString);
+        $query->execute([$dni]);
+        $estudiante = $query->fetchObject("Student");
+        return $estudiante;
+    }
+
+    //Función para modificar un estudiante
+    function modifyStudent($student){
+        try{
+            $this->conn->beginTransaction();
+            $stmt = $this->conn->prepare("update Students set dni=?, name=?, surname=?, age=? where id=?");
+            $dni = $student->getDni();
+            $name = $student->getName();
+            $surname = $student->getSurname();
+            $age = $student->getAge();
+            $id = $student->getId();
+            $stmt->execute([$dni, $name, $surname, $age, $id]);
+            $numberOfRows = $stmt->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        }
+        catch(PDOException $e){
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
 }
