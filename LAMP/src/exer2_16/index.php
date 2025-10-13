@@ -25,7 +25,7 @@ function printRow($student)
     //Formulario update 
     echo "<td>
         <form action='update_student.php' method='POST'>
-            <input type='hidden' name='id' value=".$student->getId().">
+            <input type='hidden' name='id' value=" . $student->getId() . ">
             <input type='submit' value='Update' name='vUpdate'>
         </form>
     </td>";
@@ -34,7 +34,7 @@ function printRow($student)
     echo "</tr>";
 }
 
-    
+
 
 try {
     //Crear conexión con la base de datos
@@ -69,7 +69,10 @@ try {
         <tr>
             <td colspan="4" align="center">
                 <input type="button" value="Buscar">
-                <input type="button" value="Añadir Estudiante">
+
+                <form action="add_student.php" method="get">
+                    <input type="submit" value="Add Student">
+                </form>
             </td>
         </tr>
     </table>
@@ -93,8 +96,8 @@ try {
             <td><input type="button" value="Update" name="vUpdate"></td>
             <td><input type="button" value="Delete" name="vDelete"></td>
         </tr>
-        <?php 
-        foreach($students as $student){
+        <?php
+        foreach ($students as $student) {
             printRow($student);
         }
         ?>

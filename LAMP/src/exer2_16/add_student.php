@@ -15,17 +15,12 @@ function test_input($data)
 try {
     //Crear conexión con la base de datos
     $oper = new OperationsDB();
-    $student = null;
-    if (!empty($_POST['id'])) {
-        $student = $oper->getStudent($_POST['id']);
-        
-    }
+    $student;
 } catch (PDOException $e) {
     echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
 } catch (Exception $e) {
     echo "<br> <p style='color:red'> DB Error: "  . $e->getMessage() . "</p>";
 }
-
 
 //Definimos las variables y los errors
 
@@ -64,7 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
         $age = test_input($_POST["vAge"]);
     }
 
-    //Se o erro está vacío entramos no if
     if (empty($error)) {
         // Crear un objeto Student vacío
         $student = new Student();
@@ -75,70 +69,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
         $student->setSurname($surname);
         $student->setAge((int)$age);
 
-        //Llamo a la función que modifica el esutdiante
-        $rows = $oper->modifyStudent($student);
-        //Si se modifica alguna row, es que funciono y nos movemos a index.php
+        //Llamo a la función que crea el estudiante
+        $rows = $oper->addStudent($student);
         if ($rows > 0) {
             header('Location: index.php');
-        // Se non se modifica mandamos mensaxe, e collemos o ID do student para mandar o estudiante sen modificar
         } else {
-            echo "<p>No se modificó ningún estudiante.</p>";
-            $student = $oper->getStudent($id);
-
+            echo "<p>No se añadió ningún estudiante.</p>";
         }
     }
-    else{
-        //Co $id podemos traernos os datos antigos do student para poder encher o formulario. Ademais mostraremos a mensaxe de erro.
-        $student = $oper->getStudent($id);
-    }   
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System </title>
+    <title>Student Management System</title>
 </head>
 
 <body>
     <h1>Student Management System</h1>
-
     <span class="error" style="color: red;"><?= $error ?></span>
 
-
-    <!-- Formulario para modificar el usuario -->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
         <table border="2">
             <tr>
                 <td>DNI:</td>
                 <td>
-                    <input type="text" name="vDni" value="<?= $student->getDni()?>" required />
+                    <input type="text" name="vDni" required />
                 </td>
             </tr>
             <tr>
                 <td>Name:</td>
                 <td>
-                    <input type="text" name="vName" value="<?= $student->getName() ?>" required />
+                    <input type="text" name="vName" required />
                 </td>
             </tr>
             <tr>
                 <td>Surname:</td>
-                <td><input type="text" name="vSurname" value="<?= $student->getSurname() ?>" required ></td>
+                <td><input type="text" name="vSurname" required></td>
             </tr>
             <tr>
                 <td>Age:</td>
-                <td><input type="number" name="vAge" value="<?= $student->getAge() ?>" required ></td>
+                <td><input type="number" name="vAge" required></td>
             </tr>
             <tr>
-                <input type="hidden" name="vId" value="<?= $student->getId() ?>" />
+                <input type="hidden" name="vId" />
                 <td colspan="2"><input type="submit" value="Update"></td>
             </tr>
         </table>
     </form>
-
 
 </body>
 
