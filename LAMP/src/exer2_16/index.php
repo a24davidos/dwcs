@@ -30,7 +30,12 @@ function printRow($student)
         </form>
     </td>";
 
-    echo "<td><input type='button' value='Delete' name='vDelete'></td>";
+    echo "<td>
+    <form action='index.php' method='POST'>
+        <input type='hidden' name='vDeleteId' value=" . $student->getId() . ">
+        <input type='submit' value='Delete' name='vDelete' />
+    </form>
+    </td>";
     echo "</tr>";
 }
 
@@ -40,6 +45,19 @@ try {
     //Crear conexión con la base de datos
     $oper = new OperationsDB();
     echo "<br> <p style='color:green'>Connection Created</p>";
+
+    if (isset($_POST['vDelete']) && isset($_POST['vDeleteId'])) {
+        $id = $_POST['vDeleteId'];
+        try {
+            $deleted = $oper->deleteStudent($id);
+            if ($deleted > 0) {
+                echo "<p style='color:green'>Estudiante eliminado con éxito.</p>";
+            }
+        } catch (PDOException $e) {
+            echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
+        }
+    }
+
     $students = $oper->studentsList();
 } catch (PDOException $e) {
     echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";

@@ -77,7 +77,8 @@ class OperationsDB
     }
 
     //Función que me permite conseguir un estudiante por su ID
-    function getStudent($id){
+    function getStudent($id)
+    {
         $sqlString = "select id, dni, name, surname, age from Students where id = ?";
         $query = $this->conn->prepare($sqlString);
         $query->execute([$id]);
@@ -87,8 +88,9 @@ class OperationsDB
 
 
     //Función para modificar un estudiante
-    function modifyStudent($student){
-        try{
+    function modifyStudent($student)
+    {
+        try {
             $this->conn->beginTransaction();
             $stmt = $this->conn->prepare("update Students set dni=?, name=?, surname=?, age=? where id=?");
             $dni = $student->getDni();
@@ -100,8 +102,23 @@ class OperationsDB
             $numberOfRows = $stmt->rowCount();
             $this->conn->commit();
             return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
         }
-        catch(PDOException $e){
+    }
+
+    function deleteStudent($id)
+    {
+        try {
+            $this->conn->beginTransaction();
+            $stmt = $this->conn->prepare("delete from Students where id=?");
+            $stmt->execute([$id]);
+            $numberOfRows = $stmt->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            // roll back the transaction if something failed
             $this->conn->rollback();
             throw $e;
         }

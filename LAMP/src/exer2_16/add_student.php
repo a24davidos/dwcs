@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
             </tr>
             <tr>
                 <input type="hidden" name="vId" />
-                <td colspan="2"><input type="submit" value="Update"></td>
+                <td colspan="2"><input type="submit" value="Add Student"></td>
             </tr>
         </table>
     </form>

@@ -18,7 +18,6 @@ try {
     $student = null;
     if (!empty($_POST['id'])) {
         $student = $oper->getStudent($_POST['id']);
-        
     }
 } catch (PDOException $e) {
     echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
@@ -80,17 +79,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
         //Si se modifica alguna row, es que funciono y nos movemos a index.php
         if ($rows > 0) {
             header('Location: index.php');
-        // Se non se modifica mandamos mensaxe, e collemos o ID do student para mandar o estudiante sen modificar
+            // Se non se modifica mandamos mensaxe, e collemos o ID do student para mandar o estudiante sen modificar
         } else {
             echo "<p>No se modificó ningún estudiante.</p>";
             $student = $oper->getStudent($id);
-
         }
-    }
-    else{
+    } else {
         //Co $id podemos traernos os datos antigos do student para poder encher o formulario. Ademais mostraremos a mensaxe de erro.
         $student = $oper->getStudent($id);
-    }   
+    }
 }
 
 ?>
@@ -101,6 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management System </title>
+    <link rel="stylesheet" href="estilo_msdos.css">
 </head>
 
 <body>
@@ -115,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
             <tr>
                 <td>DNI:</td>
                 <td>
-                    <input type="text" name="vDni" value="<?= $student->getDni()?>" required />
+                    <input type="text" name="vDni" value="<?= $student->getDni() ?>" required />
                 </td>
             </tr>
             <tr>
@@ -126,15 +124,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
             </tr>
             <tr>
                 <td>Surname:</td>
-                <td><input type="text" name="vSurname" value="<?= $student->getSurname() ?>" required ></td>
+                <td><input type="text" name="vSurname" value="<?= $student->getSurname() ?>" required></td>
             </tr>
             <tr>
                 <td>Age:</td>
-                <td><input type="number" name="vAge" value="<?= $student->getAge() ?>" required ></td>
+                <td><input type="number" name="vAge" value="<?= $student->getAge() ?>" required></td>
             </tr>
             <tr>
                 <input type="hidden" name="vId" value="<?= $student->getId() ?>" />
-                <td colspan="2"><input type="submit" value="Update"></td>
+                <td colspan="2"><input class="aver" type="submit" value="Update"></td>
             </tr>
         </table>
     </form>
