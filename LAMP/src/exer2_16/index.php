@@ -16,7 +16,6 @@ function printRow($student)
 {
     //Aqui hacer una función que me imprima cada row 
     echo "<tr>";
-    echo "<td>" . $student->getId() . "</td>";
     echo "<td>" . $student->getDni() . "</td>";
     echo "<td>" . $student->getName() . "</td>";
     echo "<td>" . $student->getSurname() . "</td>";
@@ -44,6 +43,7 @@ function printRow($student)
 try {
     //Crear conexión con la base de datos
     $oper = new OperationsDB();
+    $students = [];
     echo "<br> <p style='color:green'>Connection Created</p>";
 
     if (isset($_POST['vDelete']) && isset($_POST['vDeleteId'])) {
@@ -52,13 +52,26 @@ try {
             $deleted = $oper->deleteStudent($id);
             if ($deleted > 0) {
                 echo "<p style='color:green'>Estudiante eliminado con éxito.</p>";
+                $students = $oper->studentsList();
             }
         } catch (PDOException $e) {
             echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
+            $students = $oper->studentsList();
         }
     }
 
-    $students = $oper->studentsList();
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $vDNI = (!empty($_GET["vDNI"])) ? test_input($_GET["vDNI"]) : "";
+        $vName = (!empty($_GET["vName"])) ? test_input($_GET["vName"]) : "";
+
+        echo "<p>" . $vDNI . "</p> <br>";
+
+        if ($vDNI == "" && $vName == "") {
+            $students = $oper->studentsList();
+        } else {
+            $students = $oper->searchStudent($vDNI, $vName);
+        }
+    }
 } catch (PDOException $e) {
     echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
 } catch (Exception $e) {
@@ -78,17 +91,24 @@ try {
 <body>
     <h1>Student Management System</h1>
     <table border="2px">
-        <tr>
-            <td><label for="vDNI"> DNI: </label></td>
-            <td><input type="text" id="vDNI" name="vDNI" /></td>
-            <td><label for="vName"> Name:</td>
-            <td><input type="text" id="vName" name="vName" /></td>
-        </tr>
+        <form action="index.php" method="get">
+            <tr>
+                <td><label for="vDNI">DNI:</label></td>
+                <td><input type="text" id="vDNI" name="vDNI" value="<?php echo htmlspecialchars($_GET['vDNI'] ?? ''); ?>" /></td>
+
+                <td><label for="vName">Name:</label></td>
+                <td><input type="text" id="vName" name="vName" value="<?php echo htmlspecialchars($_GET['vName'] ?? ''); ?>" /></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <input type="submit" value="Search">
+                </td>
+            </tr>
+        </form>
+
         <tr>
             <td colspan="4" align="center">
-                <input type="button" value="Buscar">
-
-                <form action="add_student.php" method="get">
+                <form action="add_student.php" method="post">
                     <input type="submit" value="Add Student">
                 </form>
             </td>
@@ -97,22 +117,12 @@ try {
     <br>
     <table border="1px">
         <tr>
-            <th>ID</th>
             <th>DNI</th>
             <th>Name</th>
             <th>Surname</th>
             <th>Age</th>
             <th>Update</th>
             <th>Delete</th>
-        </tr>
-        <tr>
-            <td>0</td>
-            <td>48110559X</td>
-            <td>David</td>
-            <td>Otero</td>
-            <td>27</td>
-            <td><input type="button" value="Update" name="vUpdate"></td>
-            <td><input type="button" value="Delete" name="vDelete"></td>
         </tr>
         <?php
         foreach ($students as $student) {

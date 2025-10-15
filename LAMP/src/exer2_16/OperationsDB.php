@@ -108,6 +108,36 @@ class OperationsDB
         }
     }
 
+    function searchStudent($dni, $name)
+    {
+        // Si ambos vacíos, devolvemos array vacío
+        if ($dni === "" && $name === "") {
+            return [];
+        }
+
+        //Creo el SQL String
+        $sqlString = "select id, dni, name, surname, age from Students where 1=1";
+
+        // Si se envía DNI y Nombre, daremos preferencia al DNI
+        if ($dni !== "") {
+            $sqlString .= " and dni like '" . $dni . "%'";
+        } else if ($name != "") {
+            $sqlString .= " and name like '" . $name . "%'";
+        }
+
+        //Creo el QUERY
+        $query = $this->conn->query($sqlString);
+
+        //Creo una lista vacía
+        $students = [];
+        while ($row = $query->fetchObject("Student")) {
+            $students[] = $row;
+        }
+
+        //devuelvo students
+        return $students;
+    }
+
     function deleteStudent($id)
     {
         try {
