@@ -23,7 +23,6 @@ try {
 }
 
 //Definimos las variables y los errors
-
 $dni = $name = $surname = $age = "";
 $error = "";
 
