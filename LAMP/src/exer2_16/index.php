@@ -44,14 +44,14 @@ try {
     //Crear conexión con la base de datos
     $oper = new OperationsDB();
     $students = [];
-    echo "<br> <p style='color:green'>Connection Created</p>";
+    $mensaje = "";
 
     if (isset($_POST['vDelete']) && isset($_POST['vDeleteId'])) {
         $id = $_POST['vDeleteId'];
         try {
             $deleted = $oper->deleteStudent($id);
             if ($deleted > 0) {
-                echo "<p style='color:green'>Estudiante eliminado con éxito.</p>";
+                $mensaje = "Student successfully eliminated";
                 $students = $oper->studentsList();
             }
         } catch (PDOException $e) {
@@ -64,7 +64,6 @@ try {
         $vDNI = (!empty($_GET["vDNI"])) ? test_input($_GET["vDNI"]) : "";
         $vName = (!empty($_GET["vName"])) ? test_input($_GET["vName"]) : "";
 
-        echo "<p>" . $vDNI . "</p> <br>";
 
         if ($vDNI == "" && $vName == "") {
             $students = $oper->studentsList();
@@ -86,6 +85,7 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Management System</title>
+    <link rel="stylesheet" href="style.css"><br>
 </head>
 
 <body>
@@ -115,7 +115,7 @@ try {
         </tr>
     </table>
     <br>
-    <table border="1px">
+    <table border="1px" id="resultados">
         <tr>
             <th>DNI</th>
             <th>Name</th>
@@ -130,6 +130,15 @@ try {
         }
         ?>
     </table>
+
+    <p "></p>
+
+    <?php
+    if (!empty($mensaje)) {
+        echo "<br> <p style='color:green';>" . $mensaje . "</p>";
+    }
+    ?>
+
 </body>
 
 </html>

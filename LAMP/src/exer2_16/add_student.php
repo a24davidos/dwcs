@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management System</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -113,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
             </tr>
             <tr>
                 <td>Age:</td>
-                <td><input type="number" name="vAge" required></td>
+                <td><input type="number" name="vAge" min="0" max="120" step="1" required></td>
             </tr>
             <tr>
                 <input type="hidden" name="vId" />
