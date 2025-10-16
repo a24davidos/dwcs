@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
         //Llamo a la función que crea el estudiante
         $rows = $oper->addStudent($student);
         if ($rows > 0) {
-            header('Location: index.php');
+            header('Location: studentManager.php');
         } else {
             echo "<p>No se añadió ningún estudiante.</p>";
         }
@@ -118,7 +118,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
             </tr>
             <tr>
                 <input type="hidden" name="vId" />
-                <td colspan="2"><input type="submit" value="Add Student"></td>
+                <td colspan="2"><input type="submit" value="Add Student">
+                    <a href="studentManager.php"><button type="button">Cancel</button></a>
+                </td>
+
             </tr>
         </table>
     </form>

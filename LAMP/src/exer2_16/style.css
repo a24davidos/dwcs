@@ -4,7 +4,7 @@ body {
   align-items: center; /* Centra horizontalmente */
   min-height: 100vh; /* Para que ocupe toda la altura de la pantalla */
   font-family: Arial, sans-serif;
-  background-color: rgb(231, 219, 152);
+  background-color: rgb(230, 230, 230);
 }
 
 table {

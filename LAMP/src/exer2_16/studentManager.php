@@ -30,7 +30,7 @@ function printRow($student)
     </td>";
 
     echo "<td>
-    <form action='index.php' method='POST'>
+    <form action='studentManager.php' method='POST'>
         <input type='hidden' name='vDeleteId' value=" . $student->getId() . ">
         <input type='submit' value='Delete' name='vDelete' />
     </form>
@@ -91,7 +91,7 @@ try {
 <body>
     <h1>Student Management System</h1>
     <table border="2px">
-        <form action="index.php" method="get">
+        <form action="studentManager.php" method="get">
             <tr>
                 <td><label for="vDNI">DNI:</label></td>
                 <td><input type="text" id="vDNI" name="vDNI" value="<?php echo htmlspecialchars($_GET['vDNI'] ?? ''); ?>" /></td>

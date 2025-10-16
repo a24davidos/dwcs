@@ -76,9 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
 
         //Llamo a la función que modifica el esutdiante
         $rows = $oper->modifyStudent($student);
-        //Si se modifica alguna row, es que funciono y nos movemos a index.php
+        //Si se modifica alguna row, es que funciono y nos movemos a studentManager.php
         if ($rows > 0) {
-            header('Location: index.php');
+            header('Location: studentManager.php');
             // Se non se modifica mandamos mensaxe, e collemos o ID do student para mandar o estudiante sen modificar
         } else {
             echo "<p>No se modificó ningún estudiante.</p>";
@@ -132,7 +132,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vId'], $_POST['vDni'],
             </tr>
             <tr>
                 <input type="hidden" name="vId" value="<?= $student->getId() ?>" />
-                <td colspan="2"><input class="aver" type="submit" value="Update"></td>
+                <td colspan="2">
+                    <input class="aver" type="submit" value="Update">
+                    <a href="studentManager.php"><button type="button">Cancel</button></a>
+                </td>
             </tr>
         </table>
     </form>
