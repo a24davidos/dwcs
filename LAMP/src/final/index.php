@@ -1,3 +1,31 @@
+<? 
+
+declare(strict_types=1);
+require_once("Classes/Users.php");
+require_once("Classes/Notes.php");
+require_once("Operations.php");
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+try{
+    //Create connexion with the database
+    $oper = new Operations();
+    $users = [];
+    echo "Conexión creada";
+}catch (PDOException $e) {
+    echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
+} catch (Exception $e) {
+    echo "<br> <p style='color:red'> DB Error: "  . $e->getMessage() . "</p>";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -50,5 +78,8 @@
         <a href="register.html"><button class="btn register-btn">Register</button></a>
         <a href="login.html"><button class="btn login-btn">Log in</button></a>
     </div>
+
+
+
 </body>
 </html>
