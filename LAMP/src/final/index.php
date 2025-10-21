@@ -19,17 +19,6 @@ try{
     $users = [];
     echo "Conexión creada";
 
-/*     $user = new Users();
-    $user->setFirstName("David");
-    $user->setSurname("Wapo");
-    $user->setPassword("Paloma");
-    $user->setEmail("davicetotero@gmail.com");
-
-    $rows = $oper->addUser($user);
-    if ($rows>0){
-        echo "<p>Se añadio<p><br>";
-    }
- */
 }catch (PDOException $e) {
     echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
 } catch (Exception $e) {
