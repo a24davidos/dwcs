@@ -42,6 +42,33 @@ class Operations
         $this->conn = null;
     }
 
+    function addUser($user){
+        try {
+            $this->conn->beginTransaction();
+            $newUser = $this->conn->prepare("insert into Users (first_name, surname, password, email) values(?, ?, ?, ?)");
+            $first_name = $user->getFirstName();
+            $surname = $user->getSurname();
+            $password = $user->getPassword();
+            $email = $user->getEmail();
+            $newUser->execute([$first_name, $surname, $password, $email]);
+            $numberOfRows = $newUser->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
+
+    function getUser($email){
+        $sqlString = "select id, first_name, surname, password, email from Users where email = ?";
+        $query = $this->conn->prepare($sqlString);
+        $query->execute([$email]);
+        $user = $query->fetchObject("Users");
+        // If it's empty, will return false
+        return $user;
+    }
+
     function usersList(){
         $sqlString = "select id, first_name, surname, password, email from Users";
         $query = $this->conn->prepare($sqlString);
