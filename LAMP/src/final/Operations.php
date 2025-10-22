@@ -74,7 +74,7 @@ class Operations
 
     function getUserNotes($id)
     {
-        $sqlString = "select id, title, description, date, user_id from Notes where user_id = ?";
+        $sqlString = "select id, title, description, date, user_id from Notes where user_id = ? order by date desc";
         $query = $this->conn->prepare($sqlString);
         $query->execute([$id]);
         $notes = array();
