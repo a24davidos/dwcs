@@ -38,11 +38,13 @@ class Operations
     }
 
     //Función que cierra la conexión
-    public function closeConnection(){
+    public function closeConnection()
+    {
         $this->conn = null;
     }
 
-    function addUser($user){
+    function addUser($user)
+    {
         try {
             $this->conn->beginTransaction();
             $newUser = $this->conn->prepare("insert into Users (first_name, surname, password, email) values(?, ?, ?, ?)");
@@ -60,7 +62,8 @@ class Operations
         }
     }
 
-    function getUser($email){
+    function getUser($email)
+    {
         $sqlString = "select id, first_name, surname, password, email from Users where email = ?";
         $query = $this->conn->prepare($sqlString);
         $query->execute([$email]);
@@ -69,14 +72,28 @@ class Operations
         return $user;
     }
 
-    function usersList(){
+    function getUserNotes($id)
+    {
+        $sqlString = "select id, title, description, date, user_id from Notes where user_id = ?";
+        $query = $this->conn->prepare($sqlString);
+        $query->execute([$id]);
+        $notes = array();
+        //Recorro cada fila de la respuesta y devuelvo un objeto y lo meto dentro del array
+        while ($row = $query->fetchObject("Notes")) {
+            $notes[] = $row;
+        }
+        return $notes;
+    }
+
+    function usersList()
+    {
         $sqlString = "select id, first_name, surname, password, email from Users";
         $query = $this->conn->prepare($sqlString);
         $query->execute();
         //Create a new array
         $users = array();
         //Recorro cada fila de la respuesta y devuelvo un objeto y lo meto al array
-        while($row = $query->fetchObject("Users")){
+        while ($row = $query->fetchObject("Users")) {
             $users[] = $row;
         }
         return $users;

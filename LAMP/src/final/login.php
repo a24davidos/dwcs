@@ -27,6 +27,7 @@ try {
 $email = $password = "";
 $errorEmail = $errorPassword = $errorLogin = "";
 
+//LOGIN
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //Check variables
@@ -42,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST["password"];
     }
 
+    //Si no estan vacias, podemos continuar
     if (!empty($errorEmail) || !empty($errorPassword)) {
         $errorLogin = "Invalid email or password";
     } else {

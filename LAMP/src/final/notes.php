@@ -6,15 +6,16 @@ declare(strict_types=1);
 session_start();  //Inicio la sesión
 
 require_once("Classes/Users.php");
+require_once("Classes/Notes.php");
 require_once("Operations.php");
 
 
-// COmmpruebo que el usuario esté loggeado
+// COmmpruebo que el user esté loggeado
 if (!isset($_SESSION['user_email'])) {
     header('Location: login.php');
     exit;
 }
-// Comprueb
+// Compruebo si se manda el "logout", si lo manda borramos la sesión y volvemos al inicio
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
@@ -33,9 +34,17 @@ try {
     exit;
 }
 
-//Cojo referencia del usuario 
-$usuario = $oper->getUser($_SESSION['user_email']);
-echo "Welcome " . $usuario->getFirstName();
+//Cojo referencia del user 
+$user = $oper->getUser($_SESSION['user_email']);
+$userID = $user->getId();
+echo "Welcome " . $user->getFirstName();
+echo "<br>" . $userID;
+
+$notes = $oper->getUserNotes($userID);
+
+$longitud = count($notes);
+echo "<br>" . $longitud;
+
 
 function test_input($data)
 {
@@ -44,6 +53,25 @@ function test_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
+
+function printNotes($note)
+{
+    //Facemos que imprima cada row
+
+    echo "<tr>";
+    echo "<td>" . $note->getTitle() . "</td>";
+    echo "<td>" . $note->getDescription() . "</td>";
+    echo "<td>" . $note->getDate() . "</td>";
+
+    //Actions
+    echo
+    "<td>
+        <button class='btn edit-btn'>Edit</button>
+        <button class='btn delete-btn'>Delete</button>
+    </td>";
+    echo "</tr>";
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -159,6 +187,13 @@ function test_input($data)
                         <button class="btn delete-btn">Delete</button>
                     </td>
                 </tr>
+
+                <?php
+                foreach ($notes as $note) {
+                    printNotes($note);
+                }
+                ?>
+
             </tbody>
         </table>
     </div>
