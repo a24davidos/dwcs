@@ -1,4 +1,4 @@
-<? 
+<?
 
 declare(strict_types=1);
 require_once("Classes/Users.php");
@@ -13,13 +13,12 @@ function test_input($data)
     return $data;
 }
 
-try{
+try {
     //Create connexion with the database
     $oper = new Operations();
     $users = [];
     echo "Conexión creada";
-
-}catch (PDOException $e) {
+} catch (PDOException $e) {
     echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
 } catch (Exception $e) {
     echo "<br> <p style='color:red'> DB Error: "  . $e->getMessage() . "</p>";
@@ -29,6 +28,7 @@ try{
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +43,7 @@ try{
             height: 100vh;
             margin: 0;
         }
+
         .container {
             background: white;
             padding: 20px;
@@ -51,10 +52,12 @@ try{
             text-align: center;
             width: 300px;
         }
+
         h1 {
             margin-bottom: 20px;
             color: #333;
         }
+
         .btn {
             padding: 10px 20px;
             margin: 10px;
@@ -63,24 +66,28 @@ try{
             cursor: pointer;
             font-size: 16px;
         }
+
         .register-btn {
             background-color: #ff6b6b;
             color: white;
         }
+
         .login-btn {
             background-color: #4ecdc4;
             color: white;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>NOTE MANAGEMENT WEB</h1>
-        <a href="register.html"><button class="btn register-btn">Register</button></a>
-        <a href="login.html"><button class="btn login-btn">Log in</button></a>
+        <a href="register.php"><button class="btn register-btn">Register</button></a>
+        <a href="login.php"><button class="btn login-btn">Log in</button></a>
     </div>
 
 
 
 </body>
+
 </html>
