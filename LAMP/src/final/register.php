@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user->setEmail($email);
             $rows = $oper->addUser($user);
             if ($rows > 0) {
-                header('Location success.php');
+                header('Location: success.php');
                 exit;
             }
         } catch (PDOException $e) {

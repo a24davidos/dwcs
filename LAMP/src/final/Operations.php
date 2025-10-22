@@ -62,6 +62,40 @@ class Operations
         }
     }
 
+    function addNote($note)
+    {
+        try {
+            $this->conn->beginTransaction();
+            $newNote = $this->conn->prepare("insert into Notes (id, title, description, user_id) values (?,?,?,?)");
+            $id = null;
+            $title = $note->getTitle();
+            $description = $note->getDescription();
+            $user_id = $note->getUserId();
+            $newNote->execute([$id, $title, $description, $user_id]);
+            $numberOfRows = $newNote->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
+
+    function deleteNote($id)
+    {
+        try {
+            $this->conn->beginTransaction();
+            $sqlQuery = $this->conn->prepare("delete from Notes where id=?");
+            $sqlQuery->execute([$id]);
+            $numberOfRows = $sqlQuery->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
+
     function getUser($email)
     {
         $sqlString = "select id, first_name, surname, password, email from Users where email = ?";

@@ -34,18 +34,6 @@ try {
     exit;
 }
 
-//Cojo referencia del user 
-$user = $oper->getUser($_SESSION['user_email']);
-$userID = $user->getId();
-echo "Welcome " . $user->getFirstName();
-echo "<br>" . $userID;
-
-$notes = $oper->getUserNotes($userID);
-
-$longitud = count($notes);
-echo "<br>" . $longitud;
-
-
 function test_input($data)
 {
     $data = trim($data);
@@ -59,7 +47,7 @@ function printNotes($note)
     //Facemos que imprima cada row
 
     echo "<tr>";
-    echo "<td>" . $note->getTitle() . "</td>";
+    echo "<td class='titleText'>" . $note->getTitle() . "</td>";
     echo "<td>" . $note->getDescription() . "</td>";
     echo "<td>" . $note->getDate() . "</td>";
 
@@ -67,10 +55,41 @@ function printNotes($note)
     echo
     "<td>
         <button class='btn edit-btn'>Edit</button>
-        <button class='btn delete-btn'>Delete</button>
+        <form action='notes.php' method='POST'>
+            <input type='hidden' name='noteId' value='" . $note->getId() . "'>
+            <input type='submit' value='Delete' name='delete' class='btn delete-btn'/>
+        </form>
     </td>";
     echo "</tr>";
 }
+
+if (isset($_POST['delete']) && isset($_POST['noteId'])) {
+    $noteId = $_POST['noteId'];
+    try {
+        $deleted = $oper->deleteNote($noteId);
+        if ($deleted > 0) {
+            header("Location: notes.php");
+            exit;
+        }
+    } catch (PDOException $e) {
+        echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
+    }
+}
+
+
+
+
+//Cojo referencia del user 
+$user = $oper->getUser($_SESSION['user_email']);
+$userID = $user->getId();
+$mensaje = "";
+echo "Welcome " . $user->getFirstName();
+echo "<br>" . $userID;
+
+$notes = $oper->getUserNotes($userID);
+
+$longitud = count($notes);
+echo "<br>" . $longitud;
 
 
 ?>
@@ -90,7 +109,7 @@ function printNotes($note)
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             padding: 20px;
@@ -116,8 +135,21 @@ function printNotes($note)
             border-bottom: 1px solid #ddd;
         }
 
+        td {
+            max-width: 250px;
+            /* Ancho máximo para cada celda */
+            word-wrap: break-word;
+            /* Rompe el texto largo en varias líneas */
+            overflow-wrap: break-word;
+            /* Alternativa para navegadores modernos */
+        }
+
         th {
             background-color: #f2f2f2;
+        }
+
+        .titleText {
+            font-weight: bold;
         }
 
         .button-container {
@@ -151,6 +183,17 @@ function printNotes($note)
             margin-bottom: 20px;
         }
 
+        a.add-note-btn {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #4ecdc4;
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+            height: fit-content;
+        }
+
         .exit-btn {
             background-color: #ff6b6b;
             color: white;
@@ -163,7 +206,7 @@ function printNotes($note)
     <div class="container">
         <h1>NOTE MANAGEMENT WEB</h1>
         <div class="button-container">
-            <button class="btn add-note-btn">Add New Note</button>
+            <a href="addNote.php" class="btn add-note-btn">Add New Note</a>
             <form method="post">
                 <button type="submit" name="logout" class="btn exit-btn">Exit</button>
             </form>
