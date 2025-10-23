@@ -152,9 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (!empty($_POST['title']) && (!empty(
             border: 1px solid #ddd;
             border-radius: 4px;
             resize: vertical;
-            /* Permite redimensionar verticalmente */
             font-family: inherit;
-            /* Hereda la fuente del documento */
         }
     </style>
 </head>

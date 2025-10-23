@@ -14,10 +14,9 @@ function test_input($data)
 }
 
 try {
-    //Create connexion with the database
+    //Create connection with the database
     $oper = new Operations();
     $users = [];
-    echo "Conexión creada";
 } catch (PDOException $e) {
     echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
 } catch (Exception $e) {

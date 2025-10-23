@@ -135,11 +135,13 @@ $notes = $oper->getUserNotes($userID);
 
         td {
             max-width: 250px;
-            /* Ancho máximo para cada celda */
             word-wrap: break-word;
-            /* Rompe el texto largo en varias líneas */
             overflow-wrap: break-word;
-            /* Alternativa para navegadores modernos */
+        }
+
+        td form {
+            display: inline-block;
+            margin: 0px 2px;
         }
 
         th {
@@ -203,7 +205,7 @@ $notes = $oper->getUserNotes($userID);
 
 <body>
     <div class="container">
-        <h1> <?=$user->getFirstName() ?>'s Notes Manager</h1>
+        <h1> <?= $user->getFirstName() ?>'s Notes Manager</h1>
         <div class="button-container">
             <a href="addNote.php" class="btn add-note-btn">Add New Note</a>
             <form method="post">
@@ -220,21 +222,15 @@ $notes = $oper->getUserNotes($userID);
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Example Note</td>
-                    <td>This is an example note description.</td>
-                    <td>2025-10-18</td>
-                    <td>
-                        <button class="btn edit-btn">Edit</button>
-                        <button class="btn delete-btn">Delete</button>
-                    </td>
-                </tr>
-
-                <?php
-                foreach ($notes as $note) {
-                    printNotes($note);
-                }
-                ?>
+                <?php if (empty($notes)) : ?>
+                    <tr>
+                        <td colspan="4" style="text-align:center;border:0;  ">There isn't notes to show!</td>
+                    </tr>
+                <?php else : ?>
+                    <?php foreach ($notes as $note) : ?>
+                        <?php printNotes($note); ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
 
             </tbody>
         </table>
