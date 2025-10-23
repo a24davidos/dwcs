@@ -35,11 +35,8 @@ try {
 //Cojo referencia del user 
 $user = $oper->getUser($_SESSION['user_email']);
 $userID = $user->getId();;
-
+//Cojo referencia de la nota
 $nota = $oper->getNotebyID($_POST['noteId']);
-
-echo "<br>" . $_POST['noteId'];
-echo "<br>" . $nota;
 
 
 $title = $description = "";
@@ -63,7 +60,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (!empty($_POST['title']) && (!empty(
         $description = test_input(($_POST["description"]));
     }
 
-    echo "<br> algooo";
+    if ($continue) {
+
+        //Llamo a la función que modifica
+        $rows = $oper->updateNote($title, $description, $nota->getId());
+
+        header('Location: notes.php');
+        exit;
+
+    }
 }
 
 ?>
@@ -124,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (!empty($_POST['title']) && (!empty(
         .btn {
             width: 100%;
             padding: 10px;
-            background-color: #ff6b6b;
+            background-color: #4ecdc4;
             color: white;
             border: none;
             border-radius: 4px;
@@ -156,15 +161,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (!empty($_POST['title']) && (!empty(
 
 <body>
     <div class="container">
-        <h1>NOTE MANAGEMENT WEB</h1>
+        <h1> <?=$user->getFirstName() ?>'s Notes Manager</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+            <input type="hidden" name="noteId" value="<?= $nota->getId(); ?>">
+
             <div class=" form-group">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" value="<?= $nota->getTitle() ?>" required>
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" value="<?=  ?>" required></textarea>
+                <textarea id="description" name="description" required> <?= htmlspecialchars($nota->getDescription()); ?></textarea>
             </div>
 
             <?php if (!empty($error)): ?>

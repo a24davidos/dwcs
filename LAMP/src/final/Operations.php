@@ -81,6 +81,21 @@ class Operations
         }
     }
 
+    function updateNote($title, $description, $id)
+    {
+        try {
+            $this->conn->beginTransaction();
+            $update = $this->conn->prepare("update Notes set title= ?, description = ? where id = ?");
+            $update->execute([$title, $description, $id]);
+            $numberOfRows = $update->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
+
     function deleteNote($id)
     {
         try {

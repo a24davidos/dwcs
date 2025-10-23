@@ -87,14 +87,8 @@ if (isset($_POST['delete']) && isset($_POST['noteId'])) {
 $user = $oper->getUser($_SESSION['user_email']);
 $userID = $user->getId();
 $mensaje = "";
-echo "Welcome " . $user->getFirstName();
-echo "<br>" . $userID;
 
 $notes = $oper->getUserNotes($userID);
-
-$longitud = count($notes);
-echo "<br>" . $longitud;
-
 
 ?>
 <!DOCTYPE html>
@@ -156,6 +150,7 @@ echo "<br>" . $longitud;
             font-weight: bold;
         }
 
+
         .button-container {
             display: flex;
             justify-content: space-between;
@@ -208,7 +203,7 @@ echo "<br>" . $longitud;
 
 <body>
     <div class="container">
-        <h1>NOTE MANAGEMENT WEB</h1>
+        <h1> <?=$user->getFirstName() ?>'s Notes Manager</h1>
         <div class="button-container">
             <a href="addNote.php" class="btn add-note-btn">Add New Note</a>
             <form method="post">

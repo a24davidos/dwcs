@@ -66,11 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $note = $note->setDate("default");
             $note = $note->setUserId($userID);
             $rows = $oper->addNote($note);
-            if ($rows>0){
+            if ($rows > 0) {
                 header('Location: notes.php');
                 exit;
             }
-
         } catch (PDOException $e) {
             echo "<br> <p style='color:red'> DB Error: " . $e->getMessage() . "</p><br>";
         } catch (Exception $e) {
@@ -117,6 +116,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 15px;
         }
 
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            /* espacio entre los botones */
+        }
+
+        .form-buttons .btn {
+            flex: 1;
+            text-align: center;
+        }
+
+
+
         label {
             display: block;
             margin-bottom: 5px;
@@ -136,12 +148,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .btn {
             width: 100%;
             padding: 10px;
-            background-color: #ff6b6b;
+            background-color: #4ecdc4;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+        }
+
+        .cancel-btn {
+            background-color: #ff6b6b;
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .erro {
@@ -159,16 +179,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border: 1px solid #ddd;
             border-radius: 4px;
             resize: vertical;
-            /* Permite redimensionar verticalmente */
             font-family: inherit;
-            /* Hereda la fuente del documento */
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>NOTE MANAGEMENT WEB</h1>
+        <h1> <?=$user->getFirstName() ?>'s Notes Manager</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
             <div class=" form-group">
                 <label for="title">Title:</label>
@@ -182,7 +200,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if (!empty($error)): ?>
                 <span class="erro"><?php echo $error ?></span>
             <?php endif; ?>
-            <button type="submit" class="btn">Add Note</button>
+            <div class="form-buttons">
+                <button type="submit" class="btn">Add Note</button>
+                <a href="notes.php" class="btn cancel-btn">Cancel</a>
+            </div>
         </form>
     </div>
 </body>
