@@ -164,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (!empty($_POST['title']) && (!empty(
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" required></textarea>
+                <textarea id="description" name="description" value="<?=  ?>" required></textarea>
             </div>
 
             <?php if (!empty($error)): ?>
