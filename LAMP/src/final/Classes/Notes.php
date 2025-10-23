@@ -65,4 +65,9 @@ class Notes
         $this->user_id = $user_id;
         return $this;
     }
+
+    public function __toString()
+    {
+        return "ID: $this->id, Title: $this->title, Description: $this->description";
+    }
 }

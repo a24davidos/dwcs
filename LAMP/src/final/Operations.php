@@ -119,6 +119,15 @@ class Operations
         return $notes;
     }
 
+    function getNotebyID($noteId)
+    {
+        $sqlString = "select id, title, description, date, user_id from Notes where id = ?";
+        $query = $this->conn->prepare($sqlString);
+        $query->execute([$noteId]);
+        $note = $query->fetchObject("Notes");
+        return $note;
+    }
+
     function usersList()
     {
         $sqlString = "select id, first_name, surname, password, email from Users";

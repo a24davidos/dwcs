@@ -54,7 +54,11 @@ function printNotes($note)
     //Actions
     echo
     "<td>
-        <button class='btn edit-btn'>Edit</button>
+
+        <form action='update.php' method='POST'>
+            <input type='hidden' name='noteId' value='" . $note->getId() . "'>
+            <input type='submit' value='Update' name='update' class='btn edit-btn' />
+        </form>
         <form action='notes.php' method='POST'>
             <input type='hidden' name='noteId' value='" . $note->getId() . "'>
             <input type='submit' value='Delete' name='delete' class='btn delete-btn'/>
