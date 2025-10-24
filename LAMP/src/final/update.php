@@ -67,7 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (!empty($_POST['title']) && (!empty(
 
         header('Location: notes.php');
         exit;
-
     }
 }
 
@@ -159,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (!empty($_POST['title']) && (!empty(
 
 <body>
     <div class="container">
-        <h1> <?=$user->getFirstName() ?>'s Notes Manager</h1>
+        <h1> <?= $user->getFirstName() ?>'s Notes Manager</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
             <input type="hidden" name="noteId" value="<?= $nota->getId(); ?>">
 
