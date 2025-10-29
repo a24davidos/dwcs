@@ -21,4 +21,5 @@ def nomeCompleto(name, age, surname="Apelido"):
     return (f"{name} {surname} is {age} years old.")
     
 
+
 print(nomeCompleto(None, 22, "Otero"))
