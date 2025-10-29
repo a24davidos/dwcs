@@ -2,7 +2,7 @@ class Calculadora:
 
     contador = 0;
 
-    def __init__(self, num1, num2):
+    def __init__(self, num1=0, num2=0):
         if type(num1) != int or type(num2) != int:
             raise ValueError("Deben ser números")
         self.num1 = num1
@@ -20,10 +20,18 @@ class Calculadora:
 
 
 
-calculadora1 = Calculadora(1,2)
-
-print(calculadora1.suma())
-print(Calculadora.numberOfObjects())
-
+calculadora1 = Calculadora()
+calculadora1.num1 = 5;
+calculadora1.num2 = 5;
 
 
+print("num1 =", calculadora1.num1)
+print("num2 =", calculadora1.num2)
+
+
+calculadora2 = Calculadora(3, 3)
+print(calculadora2)
+
+print(calculadora2.suma())
+
+print(f"Total = {Calculadora.numberOfObjects()}")
