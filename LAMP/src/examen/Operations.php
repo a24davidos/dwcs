@@ -36,13 +36,75 @@ class Operations
         $this->conn = null;
     }
 
-    public function getCars(){
+    public function getCars()
+    {
         $sqlString = "Select * from car";
         $query = $this->conn->prepare($sqlString);
-        $query -> execute();
+        $query->execute();
         $carList = array();
-
-        while($carList = $query->fetchObject("Car"))
+        while ($car = $query->fetchObject("Car")) {
+            $carList[] = $car;
+        }
+        return $carList;
     }
 
+    public function getCar($id)
+    {
+        $sqlString = "select id, model, fuel, price from car where id=?";
+        $query = $this->conn->prepare($sqlString);
+        $query->execute([$id]);
+        $referencia = $query->fetch();
+        $car = new Car();
+        $car->setId($referencia["id"]);
+        $car->setModel($referencia["model"]);
+        $car->setFuel($referencia["fuel"]);
+        $car->setPrice($referencia["price"]);
+        return $car;
+    }
+
+    public function updateCar($model, $fuel, $price, $id)
+    {
+        try {
+            $this->conn->beginTransaction();
+            $sqlString = "update car set model=?, fuel=?, price=? where id=?";
+            $query = $this->conn->prepare($sqlString);
+            $query->execute([$model, $fuel, $price, $id]);
+            $numberOfRows = $query->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
+
+    public function deleteCar($id){
+        try {
+            $this->conn->beginTransaction();
+            $sqlString = "delete from car where id=?";
+            $query = $this->conn->prepare($sqlString);
+            $query->execute([$id]);
+            $numberOfRows = $query->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
+
+    public function addCar($model, $fuel, $price){
+        try {
+            $this->conn->beginTransaction();
+            $sqlString = "insert into car (model, fuel, price) values (?,?,?)";
+            $query = $this->conn->prepare($sqlString);
+            $query->execute([$model, $fuel, $price]);
+            $numberOfRows = $query->rowCount();
+            $this->conn->commit();
+            return $numberOfRows;
+        } catch (PDOException $e) {
+            $this->conn->rollback();
+            throw $e;
+        }
+    }
 }
