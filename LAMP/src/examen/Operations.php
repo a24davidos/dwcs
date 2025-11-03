@@ -3,11 +3,11 @@ require_once("Car.php");
 class Operations
 {
     private $conn;
+
     public function __construct()
     {
         $this->openConnection();
     }
-
     public function openConnection()
     {
         // Database configuration (match your docker-compose.yml)
@@ -30,7 +30,6 @@ class Operations
         // Create a PDO instance (connect to the database)
         $this->conn = new PDO($dsn, $user, $pass, $options);
     } //openConnection
-
     public function closeConnection()
     {
         $this->conn = null;
@@ -38,14 +37,14 @@ class Operations
 
     public function getCars()
     {
-        $sqlString = "Select * from car";
+        $sqlString = "select * from car";
         $query = $this->conn->prepare($sqlString);
         $query->execute();
-        $carList = array();
+        $cars = array();
         while ($car = $query->fetchObject("Car")) {
-            $carList[] = $car;
+            $cars[] = $car;
         }
-        return $carList;
+        return $cars;
     }
 
     public function getCar($id)
@@ -53,12 +52,12 @@ class Operations
         $sqlString = "select id, model, fuel, price from car where id=?";
         $query = $this->conn->prepare($sqlString);
         $query->execute([$id]);
-        $referencia = $query->fetch();
+        $ref = $query->fetch();
         $car = new Car();
-        $car->setId($referencia["id"]);
-        $car->setModel($referencia["model"]);
-        $car->setFuel($referencia["fuel"]);
-        $car->setPrice($referencia["price"]);
+        $car->setId($ref["id"])
+            ->setModel($ref["model"])
+            ->setFuel($ref["fuel"])
+            ->setPrice($ref["price"]);
         return $car;
     }
 
@@ -69,7 +68,7 @@ class Operations
             $sqlString = "update car set model=?, fuel=?, price=? where id=?";
             $query = $this->conn->prepare($sqlString);
             $query->execute([$model, $fuel, $price, $id]);
-            $numberOfRows = $query->rowCount();
+            $numberOfRows = $query->rowcount();
             $this->conn->commit();
             return $numberOfRows;
         } catch (PDOException $e) {
@@ -78,13 +77,14 @@ class Operations
         }
     }
 
-    public function deleteCar($id){
+    public function deleteCar($id)
+    {
         try {
             $this->conn->beginTransaction();
             $sqlString = "delete from car where id=?";
             $query = $this->conn->prepare($sqlString);
             $query->execute([$id]);
-            $numberOfRows = $query->rowCount();
+            $numberOfRows = $query->rowcount();
             $this->conn->commit();
             return $numberOfRows;
         } catch (PDOException $e) {
@@ -93,13 +93,14 @@ class Operations
         }
     }
 
-    public function addCar($model, $fuel, $price){
+    public function addCar($model, $fuel, $price)
+    {
         try {
             $this->conn->beginTransaction();
             $sqlString = "insert into car (model, fuel, price) values (?,?,?)";
             $query = $this->conn->prepare($sqlString);
             $query->execute([$model, $fuel, $price]);
-            $numberOfRows = $query->rowCount();
+            $numberOfRows = $query->rowcount();
             $this->conn->commit();
             return $numberOfRows;
         } catch (PDOException $e) {
