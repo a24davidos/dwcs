@@ -69,6 +69,7 @@ try {
             $students = $oper->studentsList();
         } else {
             $students = $oper->searchStudent($vDNI, $vName);
+
         }
     }
 } catch (PDOException $e) {
