@@ -14,17 +14,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.conf.urls.static import static
-from django.conf import settings
-from portfolioApp import views
+from django.urls import path
+from . import views #Poñemos vies, porque queremos usar esos que estan no directorio vies de blog app
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home, name ='home'),
-    path('blog/', include('blogApp.urls')), #Esto es para redirigir el trafico que tenga blog/, a blogApp y a la carpeta urls
+    path('', views.all_blogs, name ='all_blogs'),
+    path('<int:blog_id>/', views.detail, name='detail')
+    
 
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hola mundo!</h1>
+    <img src="{% static 'portfolioApp/Adam_Sandler.png' %}" alt="" srcset="" />
+    {% for project in projects %} {% if project.url %}
+    <a href="{{ project.url }}"></a>
+    <p>{{ project.title }}</p>
+    {% else %}
+    <h3>{{ project.title }}</h3>
+    {% endif %}
+    <p>{{ project.description }}</p>
+    <p>
+      <img src="{{ project.image.url }}" alt="{{ project.title }}" srcset="" />
+    </p>
+
+    <p>{{ project.image }}</p>
+
+    {% endfor %}
+    <p>{{ projects }}</p>
+  </body>
+</html>

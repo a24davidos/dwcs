@@ -1,38 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Novell Services Login</h1>
     <form action="{% url 'datos' %}" method="get">
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username" placeholder="Enter username">
-        <br>
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password" placeholder="Enter password">
-        <br>
-        <label for="city">City of employment: </label>
-        <input type="text" name="city" id="city" placeholder="Enter city">
-        <br>
-        <label>Please specify your role:</label><br>
-        <input type="radio" name="role" value="admin"> Admin<br>
-        <input type="radio" name="role" value="engineer"> Engineer<br>
-        <input type="radio" name="role" value="manager"> Manager<br>
-        <input type="radio" name="role" value="guest"> Guest
-        <br>
-        <label>Single Sing-on:</label><br>
-        <input type="radio" name="sign" value="mail"> Admin<br>
-        <input type="radio" name="sign" value="payroll"> Payroll<br>
-        <input type="radio" name="sign" value="self-service"> Self-service<br>
-        <br>
-        <input type="submit" value="Boton">
+      <label for="username">Username: </label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        placeholder="Enter username"
+      />
+      <br />
+      <label for="password">Password: </label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Enter password"
+      />
+      <br />
+      <label for="city">City of employment: </label>
+      <input type="text" name="city" id="city" placeholder="Enter city" />
+      <br />
+      <label>Please specify your role:</label><br />
+      <input type="radio" name="role" value="admin" /> Admin<br />
+      <input type="radio" name="role" value="engineer" /> Engineer<br />
+      <input type="radio" name="role" value="manager" /> Manager<br />
+      <input type="radio" name="role" value="guest" /> Guest
+      <br />
+      <label>Single Sing-on:</label><br />
+      <input type="radio" name="sign" value="mail" /> Admin<br />
+      <input type="radio" name="sign" value="payroll" /> Payroll<br />
+      <input type="radio" name="sign" value="self-service" /> Self-service<br />
+      <br />
+      <input type="submit" value="Boton" />
     </form>
-
-</body>
-
+  </body>
 </html>
