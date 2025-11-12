@@ -12,6 +12,7 @@
     <p>{{ blog.description }}</p>
     <p>Fecha de creación: {{ blog.date }}</p>
     <p>{{ blog }}</p>
+    <a href="{% url 'detail' blog.id %}">Show more!</a>
     {% endfor %}
   </body>
 </html>
