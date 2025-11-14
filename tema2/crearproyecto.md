@@ -47,4 +47,6 @@ docker compose run --rm web python manage.py migrate
 
 Cada vez que queramos modificar un modelo, cambiemos la clase y hagamos makemigrations
 
+Para crear el superusuario primero has de correr unas makemigrations y luego un migrate, porque django tiene muchas tablas internas que tiene que correr
+
 Para crear la password: docker compose run --rm web python manage.py createsuperuser
