@@ -7,12 +7,13 @@
   </head>
   <body>
     <h1>Blog</h1>
+    <h3>There are {{ blogs.count }} blog{{ blog.count|pluralize }}</h3>
     {% for blog in blogs %}
     <h3>{{ blog.title }}</h3>
-    <p>{{ blog.description }}</p>
-    <p>Fecha de creación: {{ blog.date }}</p>
+    <p>{{ blog.description|truncatechars:30 }}</p>
+    <p>Fecha de creación: {{ blog.date|date:'M d Y' | upper }}</p>
     <p>{{ blog }}</p>
-    <a href="{% url 'detail' blog.id %}">Show more!</a>
+    <a href="{% url 'blog:detail' blog.id %}">Show more!</a>
     {% endfor %}
   </body>
 </html>

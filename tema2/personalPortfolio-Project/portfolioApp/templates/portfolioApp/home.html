@@ -1,28 +1,21 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Hola mundo!</h1>
-    <img src="{% static 'portfolioApp/Adam_Sandler.png' %}" alt="" srcset="" />
-    {% for project in projects %} {% if project.url %}
-    <a href="{{ project.url }}"></a>
-    <p>{{ project.title }}</p>
-    {% else %}
-    <h3>{{ project.title }}</h3>
-    {% endif %}
-    <p>{{ project.description }}</p>
-    <p>
-      <img src="{{ project.image.url }}" alt="{{ project.title }}" srcset="" />
-    </p>
+{% extends "portfolioApp/base.html" %} {% load static %} {% block content %}
 
-    <p>{{ project.image }}</p>
+<h1>Hola mundo!</h1>
 
-    {% endfor %}
-    <p>{{ projects }}</p>
-  </body>
-</html>
+<a href="{% url 'blog:all_blogs' %}">Blogs</a>
+<br />
+
+<img src="{% static 'portfolioApp/Adam_Sandler.png' %}" alt="Adam Sandler" />
+
+{% for project in projects %} {% if project.url %}
+<a href="{{ project.url }}">{{ project.title }}</a>
+{% else %}
+<h3>{{ project.title }}</h3>
+{% endif %}
+
+<p>{{ project.description }}</p>
+
+<p>
+  <img src="{{ project.image.url }}" alt="{{ project.title }}" />
+</p>
+{% endfor %} {% endblock %}
