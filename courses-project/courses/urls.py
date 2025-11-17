@@ -24,7 +24,9 @@ from registrationApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('courses/', include('coursesApp.urls'))
+    path('courses/', include('coursesApp.urls')),
+    path('registration', views.registration, name='registration'),
+    path('registration/show/', views.registration_view, name='show_registration'), 
 
 ]
 

@@ -7,4 +7,4 @@ class Course(models.Model):
     photo = models.ImageField(upload_to='coursesApp/')
 
     def __str__(self):
-        return self.title
+        return self.name

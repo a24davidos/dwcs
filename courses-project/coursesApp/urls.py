@@ -21,5 +21,5 @@ app_name = 'courses'
 
 urlpatterns = [
     path('', views.all_courses, name='all_courses'),
-
+    path("<int:curse_id>/", views.detail, name="detail"),   # Detalle
 ]

@@ -1,0 +1,9 @@
+{% extends "registrationApp/base.html" %} {% load static %} {% block content %}
+
+<h1>{{ course.name }}</h1>
+
+<p> {{ course.description }}</p>
+
+<img src="{{ course.photo.url  }}" alt="{{ course.name }}" width="1000px">
+
+{% endblock %}

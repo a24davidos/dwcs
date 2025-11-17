@@ -4,5 +4,6 @@
 
 {% for course in courses %}
 
-<h3>{{ blog.title }}</h3>
+<a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a>
+<br>
 {% endfor %} {% endblock %}

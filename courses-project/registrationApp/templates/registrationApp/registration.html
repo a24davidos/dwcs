@@ -1,0 +1,23 @@
+{% extends "registrationApp/base.html" %} {% load static %} {% block content %}
+
+<h1>Registration Form</h1>
+
+<form method="post" action="{% url 'show_registration' %}">
+    {% csrf_token %}
+
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="surname">Surname:</label><br>
+    <input type="text" id="surname" name="surname" required><br><br>
+
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" min="0" required><br><br>
+
+    <label for="date">Date:</label><br>
+    <input type="date" id="date" name="date" required><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}
