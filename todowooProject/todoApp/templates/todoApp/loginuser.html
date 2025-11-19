@@ -1,11 +1,11 @@
 {% extends 'todoApp/base.html' %} {% block content %}
-<h1>This is the signup page</h1>
+<h1>This is the login page</h1>
 <p>
   <h2>{{ error }}</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Sign Up">
+    <input type="submit" value="Login">
   </form>
 </p>
 {% endblock%}
