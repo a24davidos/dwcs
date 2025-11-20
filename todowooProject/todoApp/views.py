@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 
+from todoApp.forms import TodoForm
+from todoApp.models import Todo
+
 
 # Create your views here.
 def signupuser(request):
@@ -40,7 +43,9 @@ def loginuser(request):
             return render(request, 'todoApp/loginuser.html', {'form': AuthenticationForm()})
 
 def currenttodos(request):
-    return render(request, 'todoApp/currenttodos.html')
+    todos = Todo.objects.filter(user=request.user, datecompleted__isnull=True).order_by('-created')
+    
+    return render(request, 'todoApp/currenttodos.html', {'todos': todos})
 
 def home(request):
     return render(request, 'todoApp/home.html')
@@ -50,3 +55,18 @@ def logoutuser(request):
         logout(request)
         return redirect('home')
 
+def createtodo(request):
+    if request.method == 'GET':
+        return render(request, 'todoApp/createtodo.html', {'form': TodoForm()})
+    else:
+        try:
+            form = TodoForm(request.POST) # Formulario cos datos que introudciu o usuario
+            newtodo = form.save(commit=False) # Crea un obxecto todo cos campos do form
+                                            #commit False para que non o cgarde na BD
+            newtodo.user = request.user   #asignamos valor ao campo user do obxecto newtodo
+            newtodo.save() # Gardamos newtodo na bd
+            return redirect('currenttodos')
+
+        except ValueError:
+            return render(request, 'todoApp/createtodo.html', {'form':TodoForm(), 'error':'Aconteceu un erro e non se puido crear'})
+        
