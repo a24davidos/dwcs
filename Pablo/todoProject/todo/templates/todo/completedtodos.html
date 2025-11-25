@@ -1,0 +1,12 @@
+{% extends "todo/base.html" %} {% load static %} {% block content %}
+<h1>Completed to-dos</h1>
+<a href="{% url 'currenttodos' %}">Current to-dos</a>
+<ul>
+  {% for todo in todos %}
+  <li>
+    {% if todo.important %}<b>{% endif %}<a href="{% url 'viewtodo' todo.id %}">{{ todo.title }}</a>{% if todo.important %}</b>{% endif %}
+    {% if todo.memo %} - {{ todo.memo }} {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
