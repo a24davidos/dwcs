@@ -20,5 +20,11 @@ from projectsApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    #Auth
+    path('signup/',views.signupuser,name='signupuser'),
+
+
+
     path('', views.home, name='home'),
 ]
