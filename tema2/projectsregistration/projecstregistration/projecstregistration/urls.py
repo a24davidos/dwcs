@@ -27,4 +27,6 @@ urlpatterns = [
 
 
     path('', views.home, name='home'),
+    path('currentprojects', views.currentprojects, name='currentprojects'),
+    path('createproject', views.createproject, name="createproject")
 ]
