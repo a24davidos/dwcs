@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from . import ProjectForm
+from .forms import ProjectForm
 
 # Create your views here.
 def home(request):
@@ -31,5 +31,19 @@ def signupuser(request):
             except IntegrityError:
                 return render(request, 'projectsApp/signupuser.html', {'form':UserCreationForm(),'error':'The username has already been taken, use another username.'})
         else:
-            return render(request, 'todo/signupuser.html', {'form':UserCreationForm(),'error':'Passwords don´t match.'})
-                
+            return render(request, 'projectsApp/signupuser.html', {'form':UserCreationForm(),'error':'Passwords don´t match.'})
+
+# Vista para facer o login
+def loginuser(request):
+    if request.method == 'GET':
+        return render(request, 'projectsApp/loginuser.html', {'form':AuthenticationForm()})
+    else:
+        try:
+            user = authenticate(request, username= request.POST['username'], password = request.POST['password'])
+            if user is None:
+                return render(request, 'projectsApp/loginuser.html',{'form':AuthenticationForm(),'error':'User not found.'})
+            else:
+                login(request,user)
+            return redirect('currentprojects')
+        except Exception:
+            return render(request, 'projectsApp/loginuser.html',{'form':AuthenticationForm(),'error':'ERROR'})

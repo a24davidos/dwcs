@@ -23,6 +23,7 @@ urlpatterns = [
 
     #Auth
     path('signup/',views.signupuser,name='signupuser'),
+    path('loginuser/',views.loginuser,name='loginuser'),
 
 
 
