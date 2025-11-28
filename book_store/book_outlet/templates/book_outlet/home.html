@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hola meu</h1>
+    <p>The title of the second book is: {{ title }}</p>
+    <p>First book: {{ firstBook.title }} - {{ firstBook.author }}</p>
+    <p>Book with title that contains...: {{ buscaTitulo.title }}</p>
+    <p>
+    <h2>Best Selling Books</h2>
+    {% for bestsellingbook in bestSellingBooks %}
+    <p> {{ bestsellingbook.title }}</p>
+    {% endfor %}
+    </p>
+    <p>
+    <h2>Best Examples Books</h2>
+    {% for example in orExampleBooks %}
+    <p> {{ example.title }}</p>
+    {% endfor %}
+    </p>
+</body>
+
+</html>
