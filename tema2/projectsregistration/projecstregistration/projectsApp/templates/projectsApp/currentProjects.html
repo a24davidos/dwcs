@@ -1,6 +1,23 @@
-{% extends "projectsApp/base.html" %}
-{% load static %}
+{% extends 'projectsApp/base.html' %}
 
 {% block content %}
-<h1>Current Projects</h1>
+<h2>My Projects</h2>
+
+
+
+{% if projects %}
+<ul>
+    {% for project in projects %}
+    <li>
+        <a href="{% url 'editproject' project.id %}"><strong>{{ project.title }}</strong></a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No projects found.</p>
+{% endif %}
+
+
+<a href="{% url 'createproject' %}" class="btn btn-primary">Add New Project</a>
+
 {% endblock %}

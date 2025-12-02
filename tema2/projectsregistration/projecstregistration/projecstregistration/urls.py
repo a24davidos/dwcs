@@ -24,10 +24,12 @@ urlpatterns = [
     #Auth
     path('signup/',views.signupuser,name='signupuser'),
     path('loginuser/',views.loginuser,name='loginuser'),
-
+    path('logout/', views.logoutuser, name='logoutuser'),
 
 
     path('', views.home, name='home'),
     path('currentprojects', views.currentprojects, name='currentprojects'),
-    path('createproject', views.createproject, name="createproject")
+    path('createproject', views.createproject, name="createproject"),
+    path('projects/<int:project_id>/edit/', views.editproject, name='editproject'),
+
 ]
