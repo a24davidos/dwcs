@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Book Outlet</title>
 </head>
-
 <body>
     <h1>Hola meu</h1>
+
+    <!-- Título del segundo libro -->
     <p>The title of the second book is: {{ title }}</p>
-    <p>First book: {{ firstBook.title }} - {{ firstBook.author }}</p>
-    <p>Book with title that contains...: {{ buscaTitulo.title }}</p>
-    <p>
+
+    <!-- Primer libro -->
+    <p>First book: {{ firstBook.title }} - Author: {{ firstBook.author }}</p>
+
+    <!-- Best Selling Books -->
     <h2>Best Selling Books</h2>
-    {% for bestsellingbook in bestSellingBooks %}
-    <p> {{ bestsellingbook.title }}</p>
+    <ul>
+    {% for book in bestSellingBooks %}
+        <li>{{ book.title }} - Author: {{ book.author }}</li>
     {% endfor %}
-    </p>
-    <p>
-    <h2>Best Examples Books</h2>
-    {% for example in orExampleBooks %}
-    <p> {{ example.title }}</p>
+    </ul>
+
+    <!-- Bestselling books of J.K. Rowling -->
+    <h2>Bestselling Books of J. K. Rowling</h2>
+    <ul>
+    {% for book in bestSellingRowling %}
+        <li>{{ book.title }} - Rating: {{ book.rating }}</li>
     {% endfor %}
-    </p>
-    <hr>
+    </ul>
 
 </body>
-
 </html>

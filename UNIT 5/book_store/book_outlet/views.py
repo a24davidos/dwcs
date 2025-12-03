@@ -5,24 +5,25 @@ from django.db.models import Q
 
 # Create your views here.
 def home(request):
+    #Esto para coger el segundo libro de la base de datos
     bookTitle = Book.objects.all()[1].title
+    #Esto para coger el objeto book
     firstBook = get_object_or_404(Book, pk=1)
-    # firstBook = Book.objects.get(id=1) #De esta forma tb se puede hacer pero es mejor con la de arriba
-    # Este es solo válido para uno, mejor usar filtros
-    # buscaTitulo = Book.objects.get(title__icontains="arry")
-    # Queries con multiples resultados
+    #De la forma siguiente tb se puede pero no es tan recomendada
+    # firstBook = Book.objects.get(id=1) h
+    
+    # The books with the highest rating.
     bestSellingBooks = Book.objects.filter(is_bestselling=True, rating=5)
-    orExampleBooks = Book.objects.filter(Q(is_bestselling=True) | Q(rating__gte=3))
 
-    # Ejercicio con highestRating
-    bestRating = Book.objects.filter(rating=5)
     # Books have pattern Potter y bestselling o tiene un rate de 3
     best3 = Book.objects.filter(
         Q(title__icontains="Potter", is_bestselling=True) | Q(rating=3)
     )
-    # Mas vendidos y autor "J.K. Transfoba"
-    bestSellingTransfoba = Book.objects.filter(
-        is_bestselling=True, title__icontains="J.K. Transfoba"
+    # The bestselling books of the author ‘J.K. Rolling’
+    bestSellingRowling = Book.objects.filter(
+        is_bestselling=True,
+        author__first_name__icontains="J. K.",
+        author__last_name__icontains="Rowling"
     )
 
     return render(
@@ -32,7 +33,7 @@ def home(request):
             "title": bookTitle,
             "firstBook": firstBook,
             "bestSellingBooks": bestSellingBooks,
-            "orExampleBooks": orExampleBooks,
+            "bestSellingRowling": bestSellingRowling
         },
     )
 
