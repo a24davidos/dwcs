@@ -9,7 +9,7 @@ def home(request):
     firstBook = get_object_or_404(Book, pk=1)
     # firstBook = Book.objects.get(id=1) #De esta forma tb se puede hacer pero es mejor con la de arriba
     # Este es solo válido para uno, mejor usar filtros
-    buscaTitulo = Book.objects.get(title__icontains="atrix")
+    # buscaTitulo = Book.objects.get(title__icontains="arry")
     # Queries con multiples resultados
     bestSellingBooks = Book.objects.filter(is_bestselling=True, rating=5)
     orExampleBooks = Book.objects.filter(Q(is_bestselling=True) | Q(rating__gte=3))
@@ -31,8 +31,13 @@ def home(request):
         {
             "title": bookTitle,
             "firstBook": firstBook,
-            "buscaTitulo": buscaTitulo,
             "bestSellingBooks": bestSellingBooks,
             "orExampleBooks": orExampleBooks,
         },
     )
+
+
+def booksList(request):
+    books = Book.objects.all()
+
+    return render(request, "book_outlet/booksList.html", {"books": books})

@@ -1,0 +1,16 @@
+<h1>Books List</h1>
+
+{% for book in books %}
+<h2>{{ book.title }}</h2>
+<p>Author:
+    {{ book.author.first_name }}
+    {{ book.author.last_name }} -
+    {{ book.author.address.city }}
+</p>
+<p>Countries where it has been published:</p>
+<ul>
+    {% for country in book.published_countries.all %}
+    <li>{{ country.name }}</li>
+    {% endfor %}
+</ul>
+{% endfor %}
