@@ -1,0 +1,10 @@
+{% extends 'blogApp/base.html' %}
+{% load static %}  {# debe ir antes de usar static #}
+
+{% block content %}
+<h1>Hola, esto es la página principal</h1>
+<p>Puedes poner aquí cualquier cosa que quieras.</p>
+
+<img src="{% static 'blogApp/img/coral.jpg' %}" alt="Coral" width="300px">
+
+{% endblock %}
