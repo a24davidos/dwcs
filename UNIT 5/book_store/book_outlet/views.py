@@ -5,13 +5,13 @@ from django.db.models import Q
 
 # Create your views here.
 def home(request):
-    #Esto para coger el segundo libro de la base de datos
+    # Esto para coger el segundo libro de la base de datos
     bookTitle = Book.objects.all()[1].title
-    #Esto para coger el objeto book
+    # Esto para coger el objeto book
     firstBook = get_object_or_404(Book, pk=1)
-    #De la forma siguiente tb se puede pero no es tan recomendada
+    # De la forma siguiente tb se puede pero no es tan recomendada
     # firstBook = Book.objects.get(id=1) h
-    
+
     # The books with the highest rating.
     bestSellingBooks = Book.objects.filter(is_bestselling=True, rating=5)
 
@@ -19,11 +19,11 @@ def home(request):
     best3 = Book.objects.filter(
         Q(title__icontains="Potter", is_bestselling=True) | Q(rating=3)
     )
-    # The bestselling books of the author ‘J.K. Rolling’
+    # The bestselling books of the authPresentaor ‘J.K. Rolling’
     bestSellingRowling = Book.objects.filter(
         is_bestselling=True,
         author__first_name__icontains="J. K.",
-        author__last_name__icontains="Rowling"
+        author__last_name__icontains="Rowling",
     )
 
     return render(
@@ -33,7 +33,7 @@ def home(request):
             "title": bookTitle,
             "firstBook": firstBook,
             "bestSellingBooks": bestSellingBooks,
-            "bestSellingRowling": bestSellingRowling
+            "bestSellingRowling": bestSellingRowling,
         },
     )
 
