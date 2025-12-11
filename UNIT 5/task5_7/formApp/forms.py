@@ -19,9 +19,11 @@ class ServicesForm(forms.Form):
     city = forms.CharField(
         label="City of employment",
         widget=forms.TextInput(attrs={"placeholder": "Enter city"}),
+        required=False
     )
     web_server = forms.ChoiceField(
-        label="Web Server", choices=[("Apache", "Apache"), ("Nginx", "Nginx")]
+        label="Web Server", choices=[("Apache", "Apache"), ("Nginx", "Nginx")],
+        required=False
     )
 
     role = forms.ChoiceField(
@@ -33,6 +35,7 @@ class ServicesForm(forms.Form):
             ("Guest", "Guest"),
         ],
         widget=forms.RadioSelect,
+        required=False
     )
 
     sign_on = forms.MultipleChoiceField(
