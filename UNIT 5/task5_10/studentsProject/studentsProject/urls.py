@@ -17,7 +17,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from studentsApp import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("thank-you/", views.Thank_you.as_view(), name="thank-you"),
+    path("", views.StudentsView.as_view(), name="student_form"),
+    path("students_list", views.StudentsListView.as_view(), name="students_list"),
+    path("students/<int:pk>/", views.SingleListView.as_view(), name="single_student"),
+    path("students/<int:pk>/edit", views.UpdateStudentView.as_view(), name="edit"),
+    path("students/<int:pk>/delete", views.StudentDeleteView.as_view(), name="delete")
+
 ]

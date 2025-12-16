@@ -1,0 +1,15 @@
+{% extends "studentsApp/base.html" %}
+
+{% block title %}
+Student Details
+{% endblock  %}
+
+{% block content %}
+<h1>Student: </h1>
+<p><strong>Name: </strong> {{ student.name }}</p>
+<p><strong>Degree: </strong>{{ student.degree }}</p>
+
+<a href="{% url 'edit' student.pk %}">Modificar</a>
+<a href="{% url 'delete' student.pk %}">Eliminar</a>
+{% endblock  %}
+
