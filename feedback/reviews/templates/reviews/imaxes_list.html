@@ -1,0 +1,16 @@
+{% extends "reviews/base.html" %} {% load static %} {% block title %}All
+Reviews{% endblock %} {% block content %}
+
+<h1>All Images</h1>
+
+<ul>
+  {% for profile in profiles %}
+  <li>
+    <img src="{{ profile.image.url }}" alt="image example" width="200px" />
+  </li>
+  {% empty %}
+  <li>No reviews yet.</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

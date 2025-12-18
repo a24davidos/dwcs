@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review
+from .models import Review, UserProfile
 
 
 class ReviewForm(forms.ModelForm):
@@ -18,3 +18,9 @@ class ReviewForm(forms.ModelForm):
                 "max_length": "Please enter a shorter name",
             }
         }
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = "__all__"
