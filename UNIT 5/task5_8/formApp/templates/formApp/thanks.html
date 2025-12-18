@@ -1,27 +1,14 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Thanks</title>
-    <link rel="stylesheet" href="{% static 'formApp/styles.css' %}">
-
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'formApp/styles.css' %}" />
+  </head>
+  <body>
     <div class="container">
-        <h1>Thanks for submitting the form!</h1>
-        <p><strong>Username:</strong> {{ username }}</p>
-        <p><strong>Password:</strong> {{ password }}</p>
-        <p><strong>City:</strong> {{ city }}</p>
-        <p><strong>Role:</strong> {{ role }}</p>
-        <p><strong>Web Server:</strong> {{ web_server }}</p>
-        <p><strong>Single Sign-on:</strong></p>
-        <ul>
-            {% for item in sign_on %}
-            <li> {{item}} </li>
-            {% endfor %}
-        </ul>
+      <h1>Thanks for submitting the form!</h1>
     </div>
-
-</body>
+  </body>
 </html>
