@@ -1,0 +1,4 @@
+<li>
+    <a href="{% url 'post' post.id %}">{{ post.title }}</a>
+    - {{ post.date|date:"D d M Y" }}
+</li>
