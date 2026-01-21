@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   {% load static %}
 
@@ -94,6 +94,8 @@
       />
       {% endcomment %}
       <p>{{ post.content }}</p>
+
+      <img src="{{post.image.url}}" alt="" />
 
       <p>
         <strong>Author:</strong>

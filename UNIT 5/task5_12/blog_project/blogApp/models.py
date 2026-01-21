@@ -22,7 +22,8 @@ class Author(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     excerpt = models.CharField(max_length=150)
-    image_name = models.CharField(max_length=100)
+    # Esto lo pongo como nullTrue y blaknTrue, porque ya tengo registros en la base de datos y no quiero romperlo todo
+    image = models.ImageField(upload_to="blogApp/posts", null=True, blank=True)
     date = models.DateField(auto_now=True)
     content = models.TextField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(

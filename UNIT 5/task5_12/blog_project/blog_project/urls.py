@@ -20,12 +20,15 @@ from django.urls import path
 from blogApp import views
 from django.conf.urls.static import static
 from django.conf import settings
+from blogApp.views import HomeView, AllPostsView, PostView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.home, name="home"),
-    path("post/<int:post_id>/", views.publicacion, name="post"),
-    path("all", views.allposts, name="allposts")
+    path("", HomeView.as_view(), name="home"),
+    path("allposts/", AllPostsView.as_view(), name="allPosts"),
+    path("post/<int:pk>/", PostView.as_view(), name="post"),
 ]
 
+
+# Esto permite ver las imágenes desde el navegador.
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
