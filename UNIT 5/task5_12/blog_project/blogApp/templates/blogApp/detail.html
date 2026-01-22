@@ -109,6 +109,19 @@
         {% endfor %}
       </ul>
       <p><strong>Date:</strong> {{ post.date|date:"D d M Y" }}</p>
+
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Enviar comentario</button>
+      </form>
+
+      <ul>
+        {% for comment in post.comments.all %}
+        <li><strong>{{ comment.user_name }}</strong>: {{ comment.text }}</li>
+        {% empty %}
+        <li>No hay comentarios aún.</li>
+        {% endfor %}
+      </ul>
     </main>
   </body>
 </html>

@@ -37,10 +37,13 @@ class Post(models.Model):
 
 class Comment(models.Model):
     user_name = models.CharField(max_length=120)
-    user_email = models.EmailField
+    user_email = models.EmailField(null=True, blank=True)
     text = models.TextField(max_length=400)
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
         related_name="comments",  # Permiteme acceder dende post: post.comments.all()
     )
+
+    def __str__(self):
+        return f"{self.user_name} on {self.post.title}"
