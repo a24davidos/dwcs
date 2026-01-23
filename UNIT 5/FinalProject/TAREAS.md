@@ -1,0 +1,1 @@
+Terminar las funciones de login y logout, de momento tengo el registro que ya es bastante
