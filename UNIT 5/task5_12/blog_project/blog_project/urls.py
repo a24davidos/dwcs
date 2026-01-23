@@ -20,13 +20,15 @@ from django.urls import path
 from blogApp import views
 from django.conf.urls.static import static
 from django.conf import settings
-from blogApp.views import HomeView, AllPostsView, PostView
+from blogApp.views import HomeView, AllPostsView, SinglePostView, ReadLaterView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", HomeView.as_view(), name="home"),
     path("allposts/", AllPostsView.as_view(), name="allPosts"),
-    path("post/<int:pk>/", PostView.as_view(), name="post"),
+    path("post/<int:pk>/", SinglePostView.as_view(), name="post"),  
+    path("read-later/", ReadLaterView.as_view(), name="read-later"),
+
 ]
 
 

@@ -93,7 +93,7 @@
       <p>Tu blog de actualidad y electrónica musical</p>
 
       <img
-        src="{% static 'blogApp/img/coral.jpg' %}"
+        src="{% static 'blogApp/img/pluto.jpg' %}"
         alt="Coral"
         width="300px"
       />
@@ -106,7 +106,10 @@
       </ul>
 
       <h2>All Posts</h2>
-      <a href="{% url 'allPosts' %}">Ver todos los posts</a>
+      <a href="{% url 'allPosts' %}">See all post</a>
+
+      <h2>Read Later Posts</h2>
+      <a href="{% url 'read-later' %}"/>See read later posts
     </main>
   </body>
 </html>
