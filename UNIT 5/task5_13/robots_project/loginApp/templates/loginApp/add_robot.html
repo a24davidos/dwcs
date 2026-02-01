@@ -1,0 +1,16 @@
+{% extends "loginApp/base.html" %}{% block content %}
+
+{% if form.errors %}
+    <p style="color: red;">Please correct the errors below.</p>
+{% endif %}
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add robot</button>
+</form>
+
+
+
+{% endblock  %}

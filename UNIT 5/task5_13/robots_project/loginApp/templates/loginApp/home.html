@@ -1,0 +1,30 @@
+{% extends "loginApp/base.html" %}
+{% block content %}
+
+<a href="{% url "add_robot" %}">Add a new robot!</a>
+
+<div class="container-robots">
+    {% if robots %}
+
+    {% for robot in robots %}
+    <div class="card-robot">
+        <p><strong>Name: </strong>  <a href="{% url 'detail_robot' robot.id %}"> {{ robot.name }} </a> </p>
+        <!-- <p> <strong>Description: </strong> {{ robot.description }}</p>
+
+        {% if robot.image %}
+        <img src="{{ robot.image.url }}" alt="Imagen de Robot" style="width: 150px;">
+        {% endif %}
+
+
+        <p> <strong>Robot Technitian: </strong>{{robot.RobotTechnitian}}</p> -->
+
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <p>There is no robots</p>
+
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "loginApp/base.html" %} {% block content %}
+
+<div class="container-robots">
+
+    <div class="card-robot">
+    <p><strong>Name: </strong> {{ robot.name }} </p>
+    <p> <strong>Description: </strong> {{ robot.description }}</p>
+
+    {% if robot.image %}
+    <img src="{{ robot.image.url }}" alt="Imagen de Robot" style="width: 150px;">
+    {% endif %}
+
+
+    <p> <strong>Robot Technitian: </strong>{{robot.RobotTechnitian}}</p>
+</div>
+
+</div>
+{% endblock  %}
