@@ -3,16 +3,26 @@
 <div class="container-robots">
 
     <div class="card-robot">
-    <p><strong>Name: </strong> {{ robot.name }} </p>
-    <p> <strong>Description: </strong> {{ robot.description }}</p>
+        <p><strong>Name: </strong> {{ robot.name }} </p>
+        <p> <strong>Description: </strong> {{ robot.description }}</p>
 
-    {% if robot.image %}
-    <img src="{{ robot.image.url }}" alt="Imagen de Robot" style="width: 150px;">
-    {% endif %}
+        {% if robot.image %}
+        <img src="{{ robot.image.url }}" alt="Imagen de Robot" style="width: 150px;">
+        {% endif %}
 
+        {% if not robot.fav %}
+        <form method="POST" action="{% url 'favorito' robot.id %}">
+            {% csrf_token %}
+            <button type="submit">Mark as favourite</button>
+        </form>
+        {% else %}
+        <p>★ FAVORITO ★</p>
+        {% endif %}
 
-    <p> <strong>Robot Technitian: </strong>{{robot.RobotTechnitian}}</p>
+        <p> <strong>Robot Technitian: </strong>{{robot.RobotTechnitian}}</p>
+        <a href="{% url 'update' robot.id %}">Update</a>
+        <a href="{% url 'delete' robot.id %}">Delete</a>
+    </div>
+
 </div>
-
-</div>
-{% endblock  %}
+{% endblock %}

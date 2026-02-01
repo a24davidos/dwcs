@@ -23,9 +23,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path("", views.home, name="home"),
-    path("", views.RobotsListViews.as_view()),
+    path("", views.RobotsListViews.as_view(), name="lista"),
     #path("add_robot/",views.RobotAddView.as_view(), name="add_robot")
     path("add_robot/",views.addRobot, name="add_robot"),
-    path("detail/<int:pk>/", views.RobotDetailView.as_view(), name="detail_robot")
+    path("detail/<int:pk>/", views.RobotDetailView.as_view(), name="detail_robot"),
+    path("robot_delete/<int:pk>", views.RobotDeleteView.as_view(), name="delete"),
+    path("robot_update/<int:pk>", views.RobotUpdateView.as_view(), name="update"),
+    path('fav/<int:pk>/', views.marcarFavorito, name="favorito"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

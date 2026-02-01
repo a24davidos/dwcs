@@ -14,6 +14,7 @@ class Robot(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
     image = models.ImageField(blank=True, null=True)
+    fav = models.BooleanField(default=False)
     RobotTechnitian = models.ForeignKey(Technitian, on_delete=models.SET_NULL, null=True, blank=True, related_name="fk_technitian")
     
     def __str__(self):
